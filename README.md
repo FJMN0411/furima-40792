@@ -48,15 +48,12 @@
 
 | Column       | Type　　 | Options  　 |
 | ------------ | ------- | ----------- |
-| card_number  | integer | null: false |
-| card_date    | integer | null: false |
-| CVC          | integer | null: false |
 | postal_code  | string  | null: false |
 | area_id      | integer | null: false |
 | city         | string  | null: false |
-| block        | integer | null: false |
+| block        | string  | null: false |
 | building     | string  |             |
-| phone_number | integer | null: false |
+| phone_number | string  | null: false |
 | order        | references | null: false, foreign_key: true |
 
 - belongs_to :order
