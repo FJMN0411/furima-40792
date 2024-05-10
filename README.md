@@ -1,24 +1,65 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| nickname           | string | null: false |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false |
+| first-name         | string | null: false |
+| last-name          | string | null: false |
+| last-name-kana     | string | null: false |
+| first-name-kana    | string | null: false |
 
-* Ruby version
+- has_many :item
+- has_many :order
+- has_one :address
 
-* System dependencies
+## items テーブル
 
-* Configuration
+| Column         | Type    | Options     |
+| -------------- | ------- | ----------- |
+| name           | string  | null: false |
+| price          | string  | null: false |
+| content        | text    | null: false |
+| category_id    | integer | null: false |
+| condition_id   | integer | null: false |
+| cost_id        | integer | null: false |
+| area_id        | integer | null: false |
+| date_id        | integer | null: false |
+| user           | references | null: false, foreign_key: true |
+| order          | references | null: false, foreign_key: true |
 
-* Database creation
+- belongs_to :user
+- has_one :order
 
-* Database initialization
+## orders テーブル
 
-* How to run the test suite
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| user    | references | null: false, foreign_key: true |
+| item    | references | null: false, foreign_key: true |
 
-* Services (job queues, cache servers, search engines, etc.)
+- belongs_to :user
+- belongs_to :item
+- has_one :address
 
-* Deployment instructions
+## address　テーブル
 
-* ...
+| Column       | Type       | Options                        |
+| ------------ | ------- | ----------- |
+| postal-code  | string  | null: false |
+| Prefecture   | string  | null: false |
+| city         | string  | null: false |
+| block        | string  | null: false |
+| building     | string  | null: false |
+| phone-number | string  | null: false |
+
+- belongs_to :user
+- belongs_to :order
+
+### Association
+
+- belongs_to :room
+- belongs_to :user
