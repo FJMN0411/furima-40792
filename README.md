@@ -11,18 +11,17 @@
 | last_name          | string | null: false |
 | last_name_kana     | string | null: false |
 | first_name_kana    | string | null: false |
-| birth              | string | null: false |
+| birth              | date   | null: false |
 
-- has_many :item
-- has_many :order
-- has_one :address
+- has_many :items
+- has_many :orders
 
 ## items テーブル
 
 | Column         | Type    | Options     |
 | -------------- | ------- | ----------- |
 | name           | string  | null: false |
-| price          | string  | null: false |
+| price          | integer  | null: false |
 | content        | text    | null: false |
 | category_id    | integer | null: false |
 | condition_id   | integer | null: false |
@@ -30,7 +29,6 @@
 | area_id        | integer | null: false |
 | date_id        | integer | null: false |
 | user           | references | null: false, foreign_key: true |
-| order          | references | null: false, foreign_key: true |
 
 - belongs_to :user
 - has_one :order
@@ -50,12 +48,15 @@
 
 | Column       | Type　　 | Options  　 |
 | ------------ | ------- | ----------- |
+| card_number  | integer | null: false |
+| card_date    | integer | null: false |
+| CVC          | integer | null: false |
 | postal_code  | string  | null: false |
-| area_id      | references | null: false, foreign_key: true |
+| area_id      | integer | null: false |
 | city         | string  | null: false |
-| block        | string  | null: false |
+| block        | integer | null: false |
 | building     | string  |             |
-| phone_number | string  | null: false |
+| phone_number | integer | null: false |
+| order        | references | null: false, foreign_key: true |
 
-- belongs_to :user
 - belongs_to :order
