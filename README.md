@@ -48,10 +48,10 @@
 
 ## address　テーブル
 
-| Column       | Type       | Options                        |
+| Column       | Type　　 | Options  　 |
 | ------------ | ------- | ----------- |
 | postal_code  | string  | null: false |
-| area_id      | string  | null: false |
+| area_id      | references | null: false, foreign_key: true |
 | city         | string  | null: false |
 | block        | string  | null: false |
 | building     | string  |             |
