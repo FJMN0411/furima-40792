@@ -7,10 +7,11 @@
 | nickname           | string | null: false |
 | email              | string | null: false, unique: true |
 | encrypted_password | string | null: false |
-| first-name         | string | null: false |
-| last-name          | string | null: false |
-| last-name-kana     | string | null: false |
-| first-name-kana    | string | null: false |
+| first_name         | string | null: false |
+| last_name          | string | null: false |
+| last_name_kana     | string | null: false |
+| first_name_kana    | string | null: false |
+| birth              | string | null: false |
 
 - has_many :item
 - has_many :order
@@ -49,17 +50,12 @@
 
 | Column       | Type       | Options                        |
 | ------------ | ------- | ----------- |
-| postal-code  | string  | null: false |
-| Prefecture   | string  | null: false |
+| postal_code  | string  | null: false |
+| area_id      | string  | null: false |
 | city         | string  | null: false |
 | block        | string  | null: false |
-| building     | string  | null: false |
-| phone-number | string  | null: false |
+| building     | string  |             |
+| phone_number | string  | null: false |
 
 - belongs_to :user
 - belongs_to :order
-
-### Association
-
-- belongs_to :room
-- belongs_to :user
