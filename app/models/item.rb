@@ -4,7 +4,7 @@ class Item < ApplicationRecord
   belongs_to :condition
   belongs_to :cost
   belongs_to :area
-  belongs_to :date
+  belongs_to :shipping_date
   belongs_to :user
   has_one_attached :image
 
@@ -16,12 +16,12 @@ class Item < ApplicationRecord
   validates :category_id, presence: true
   validates :condition_id, presence: true
   validates :cost_id, presence: true
-  alidates :area_id, presence: true
-  alidates :date_id, presence: true
+  validates :area_id, presence: true
+  validates :shipping_date_id, presence: true
 
   validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :condition_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :cost_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :area_id, numericality: { other_than: 1, message: "can't be blank" }
-  validates :date_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :shipping_date_id, numericality: { other_than: 1, message: "can't be blank" }
 end
