@@ -51,5 +51,6 @@ class Area < ActiveHash::Base
   ]
 
   include ActiveHash::Associations
-  has_many :item
+  has_many :items
+  has_many :order_addresses
 end
