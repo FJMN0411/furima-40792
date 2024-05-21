@@ -52,9 +52,9 @@ class ItemsController < ApplicationController
   end
 
   def authenticate_item_owner
-    if current_user.nil? || current_user.id != @item.user_id
-      redirect_to root_path
-    end
+    return unless current_user.nil? || current_user.id != @item.user_id
+
+    redirect_to root_path
   end
 
   def set_item
@@ -67,8 +67,8 @@ class ItemsController < ApplicationController
   end
 
   def sold_out
-    if @item.order.present? || @item.user_id == current_user.id
-      redirect_to root_path
-    end
+    return unless @item.order.present? || @item.user_id == current_user.id
+
+    redirect_to root_path
   end
 end

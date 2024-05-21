@@ -14,10 +14,10 @@ class OrderAddress
 
   def save
     Order.transaction do
-    order = Order.create(item_id: item_id, user_id: user_id)
+      order = Order.create(item_id:, user_id:)
 
-    Address.create(postal_code: postal_code, area_id: area_id, city: city,
-                   block: block, building: building, phone_number: phone_number, order_id: order.id)
+      Address.create(postal_code:, area_id:, city:,
+                     block:, building:, phone_number:, order_id: order.id)
     end
   end
 end

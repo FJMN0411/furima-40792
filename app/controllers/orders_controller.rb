@@ -42,11 +42,11 @@ class OrdersController < ApplicationController
   end
 
   def set_gon
-    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
+    gon.public_key = ENV['PAYJP_PUBLIC_KEY']
   end
 
   def pay_item(price)
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: price,
       card: order_params[:token],
@@ -55,8 +55,8 @@ class OrdersController < ApplicationController
   end
 
   def sold_out
-    if @item.order.present? || @item.user_id == current_user.id
-      redirect_to root_path
-    end
+    return unless @item.order.present? || @item.user_id == current_user.id
+
+    redirect_to root_path
   end
 end
