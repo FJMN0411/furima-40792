@@ -2,9 +2,11 @@ class ItemsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_item_owner, only: [:edit, :update]
+  before_action :sold_out, only: [:edit]
 
   def index
     @items = Item.all.order('created_at DESC')
+    @order = Order.all
   end
 
   def new
@@ -22,6 +24,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @order = Order.all
   end
 
   def edit
@@ -49,9 +52,9 @@ class ItemsController < ApplicationController
   end
 
   def authenticate_item_owner
-    if current_user.nil? || current_user.id != @item.user_id
-      redirect_to root_path
-    end
+    return unless current_user.nil? || current_user.id != @item.user_id
+
+    redirect_to root_path
   end
 
   def set_item
@@ -61,5 +64,11 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:name, :content, :category_id, :condition_id, :cost_id, :area_id, :shipping_date_id, :price,
                                  :image).merge(user_id: current_user.id)
+  end
+
+  def sold_out
+    return unless @item.order.present? || @item.user_id == current_user.id
+
+    redirect_to root_path
   end
 end
